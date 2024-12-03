@@ -86,3 +86,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .prose code,
+  .prose pre code {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}

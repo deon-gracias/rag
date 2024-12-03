@@ -1,0 +1,13 @@
+faiss-cpu
+unstructured[pdf]
+fastapi[standard]
+langchain
+langchain-community
+langchain-text-splitters
+langchain-ollama
+langchain-unstructured
+langgraph
+langgraph-checkpoint-sqlite
+sqlmodel
+pydantic
+poppler-utils

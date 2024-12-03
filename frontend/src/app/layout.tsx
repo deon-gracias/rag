@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { ModeToggle, ThemeProvider } from "@/components/theme";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "./_components/app-sidebar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased grid h-screen grid-rows-[auto,1fr,auto]`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -35,23 +38,33 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="border-b">
-            <header className="max-w-4xl mx-auto px-2 py-4 flex justify-between">
-              <h1 className="text-2xl font-semibold tracking-tighter">Chat</h1>
-              <ModeToggle />
-            </header>
-          </div>
-          {children}
-          <div className="text-center py-2 text-xs text-foreground/50 border-t">
-            Made by{" "}
-            <a
-              href="https://github.com/deon-gracias"
-              className="font-medium text-foreground/80 underline cursor-pointer"
-            >
-              Deon Gracias
-            </a>
-          </div>
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="grid h-screen w-full grid-rows-[auto,1fr,auto]">
+              <header className="px-2 py-4 flex justify-between border-b">
+                <SidebarTrigger />
+                <h1 className="text-2xl font-semibold tracking-tighter flex items-center gap-1.5">
+                  <span className="bg-primary text-primary-foreground px-1.5 rounded">
+                    PDF
+                  </span>
+                  <span>Chat</span>
+                </h1>
+                <ModeToggle />
+              </header>
+              {children}
+              <div className="text-center py-2 text-xs text-foreground/50 border-t">
+                Made by{" "}
+                <a
+                  href="https://github.com/deon-gracias"
+                  className="font-medium text-foreground/80 underline cursor-pointer"
+                >
+                  Deon Gracias
+                </a>
+              </div>
+            </main>
+          </SidebarProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
