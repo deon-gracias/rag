@@ -53,8 +53,7 @@ class LLMOrchestrator:
         self.setup_tools()
         self.agent = create_react_agent(
             self.llm,
-            # [retrieve_docs, sum_tool],
-            [self.retrieve_docs, self.sum_tool],
+            [self.retrieve_docs],
             checkpointer=self.memory
         )
         self.construct_state_graph()
@@ -88,15 +87,8 @@ class LLMOrchestrator:
             )
 
             return serialized, retrieved_docs
-
-        @tool
-        def sum_tool(values: List[int]):
-            """Can calculate sum of a list of integer values"""
-            print(values)
-            return sum(values)
         
         self.retrieve_docs = retrieve_docs
-        self.sum_tool = sum_tool
 
 
     @staticmethod
@@ -157,15 +149,7 @@ class LLMOrchestrator:
             )
 
             return serialized, retrieved_docs
-
-        @tool
-        def sum_tool(values: List[int]):
-            """Can calculate sum of a list of integer values"""
-            return sum(values)
         
-        self.retrieve_docs = retrieve_docs
-        self.sum_tool = sum_tool
-
         self.graph_builder = StateGraph(MessagesState)
         self.graph_builder.add_node(query_or_respond)
         self.graph_builder.add_node(ToolNode([retrieve_docs]))
