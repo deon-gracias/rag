@@ -1,0 +1,5 @@
+./data/documents/*
+./data/sessions/*
+./data/vector_db/*
+./data/database.db
+
