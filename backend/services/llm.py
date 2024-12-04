@@ -24,6 +24,8 @@ from typing_extensions import List
 
 from backend.db import construct_session_path
 
+import os
+
 vector_db_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../data/vector_db")
 
 class LLMOrchestrator:
@@ -42,8 +44,8 @@ class LLMOrchestrator:
         self.config: RunnableConfig = {"configurable": {"thread_id": session_id}}
 
         sqlite_file_name = construct_session_path(session_id)
-        conn = sqlite3.connect(
-            sqlite_file_name, check_same_thread=False)
+
+        conn = sqlite3.connect(sqlite_file_name, check_same_thread=False)
         self.memory = SqliteSaver(conn)
 
         print("Loaded vector store with {} documents".format(

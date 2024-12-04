@@ -1,5 +1,4 @@
-./data/documents/*
-./data/sessions/*
-./data/vector_db/*
-./data/database.db
-
+data/documents/*
+data/sessions/*
+data/vector_db/*
+data/database.db

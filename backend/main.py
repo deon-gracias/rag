@@ -4,6 +4,16 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.routes import chat_session
 from backend import db
 
+import os
+
+data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+docs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/documents/")
+sessions_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/sessions/")
+dirs = [data_dir, docs_dir, sessions_dir]
+
+for dir in dirs:
+    if not os.path.exists(dir): os.makedirs(dir)
+
 app = FastAPI()
 
 app.add_middleware(
