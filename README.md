@@ -6,8 +6,9 @@
 
 ```python
 cd ./backend
-poetry install
-poetry shell
+conda create -n rag python=3.12
+conda activate rag
+pip install -r requirements.txt
 fastapi dev main.py
 ```
 
